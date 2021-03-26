@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Car } from 'src/app/models/car';
-import { CarDetails } from 'src/app/models/carDetail';
 import { CarService } from 'src/app/services/car.service';
 import { environment } from 'src/environments/environment';
 import { CarDetailComponent } from '../car-detail/car-detail.component';
@@ -16,7 +15,7 @@ export class CarComponent implements OnInit {
 
   dataLoaded = false;
   imageBasePath = environment.baseUrl;
-  currentCarDetail:CarDetails;
+  
 
 
   constructor(
@@ -39,8 +38,8 @@ export class CarComponent implements OnInit {
       }
     });
   }
-  setCurrentCars(){
-    this.currentCarDetail
+  setCurrentCars(carId:number){
+    this.getCarDetail(carId);
   }
 
   getCars() {

@@ -17,28 +17,38 @@ export class CarDetailComponent implements OnInit {
   carImages:CarImage[]=[];
   currentImage : CarImage;
   dataLoaded = false;
-  imageBasePath = environment.baseUrl;
+  imageBasePath = "https://localhost:5001/";
 
   constructor(
     private carService:CarService,
     private activatedRoute:ActivatedRoute,
     private imageService:CarImageService,
+    private carImageService:CarImageService
   ) { }
 
   ngOnInit(): void {
     this.activatedRoute.params.subscribe(params => {
       if(params["carId"]){
         this.getCarDetail(params["carId"]);
-        
+        this.getImagesByCarId(params["carId"]);
       }
-      this.getImagesByCarId();
+      
      
     });
   }
-  getCarDetails(){
-    this.carService.getCarDetails().subscribe((response)=> {
-      this.cars=response.data;
-    })
+  setClassName(index:Number){
+    if(index == 0){
+      return "carousel-item active";
+    }
+    else {
+      return "carousel-item";
+    }
+  }
+ 
+  getCarImages(carId:number){
+    this.carImageService.getCarImageByCarId(carId).subscribe((response) => {
+      this.carImages = response.data;
+    });
   }
 
   getCarDetail(carId:number) {
@@ -47,15 +57,17 @@ export class CarDetailComponent implements OnInit {
       this.dataLoaded = true;
     });
   }
-  getImagesByCarId(){
+  getImagesByCarId(carId:number){
     
-    this.imageService.getCarImages(this.activatedRoute.snapshot.params["carId"]).subscribe((response)=>{
-      this.carImages=response.data;      
+    this.imageService.getCarImages(carId).subscribe((response)=>{
+      console.log(response.data)
+      this.carImages=response.data;        
     });
+    
   }
 
   getCurrentImageClass(image:CarImage){
-    if(image==this.carImages[0]){
+    if(image===this.carImages[0]){
       return "carousel-item active"
     } else {
       return "carousel-item"

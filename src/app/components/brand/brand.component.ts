@@ -22,16 +22,16 @@ export class BrandComponent implements OnInit {
   }
   getCurrentBrandClass(brand:Brand){
     if(brand==this.currentBrand){
-      return "list-group-item active"
+      return "dropdown-item active"
     } else {
-      return "list-group-item"
+      return "dropdown-item"
     }
   }
   getAllBrandClass(){
     if(!this.currentBrand){
-      return "list-group-item active"
+      return "dropdown-item active"
     }else{
-      return "list-group-item"
+      return "dropdown-item"
     }
   }
 

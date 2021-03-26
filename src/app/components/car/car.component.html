@@ -5,7 +5,7 @@
 
 <div class="row" *ngIf="dataLoaded==true">
     <div *ngFor="let car of cars" class="card" style="width: 18rem;">
-        <img src="{{imageBasePath}}{{car.imagePath}}" class="card-img-top" width="320" height="200" alt={{car.description}}>
+        <!-- <img src="{{imageBasePath}}{{car.imagePath}}" class="card-img-top" width="320" height="200" alt={{car.description}}> -->
         <div class="card-body">
           <!-- <h5 class="card-title d-flex justify-content-center">{{car.carName}}</h5> -->
           <p class="card-text d-flex justify-content-center">{{car.description}}</p>
@@ -16,9 +16,10 @@
           <li class="list-group-item">Model Year: {{car.modelYear}}</li>
           <li class="list-group-item">Daily Price: {{car.description}}</li>
         </ul>
-        <div class="card-body">
+        <div   class="card-body">
             <section style="float:left">
-                <button routerLink="/car/details/{{car.id}}" type="button" class="btn btn-primary">Details</button>
+                <button  routerLink="/car/details/{{car.id}}" type="button" class="btn btn-primary">Details</button>
+                <div class="btn-group me-2"><button type="button" routerLink = "/cardetails/{{car.id}}" class="btn btn-secondary text-center">Ayrıntılar</button></div>
               </section>
               <section style="float: right">
                 <button type="button" class="btn btn-primary">Rent</button>
@@ -26,6 +27,7 @@
         </div>
       </div>
 </div>
+
 <!-- <div *ngIf="dataLoaded==false" class="spinner-border text-primary" role="status">
     <span class="visually-hidden">Loading...</span>
   </div>
